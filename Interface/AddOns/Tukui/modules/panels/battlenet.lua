@@ -3,7 +3,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 if C["datatext"].battlenet == true then
 	-- Battle.Net Bar
 	local battlenet = CreateFrame("Frame", "TukuiBattleNet", UIParent)
-	battlenet:CreatePanel(battlenet, 235, 23, "TOPLEFT", UIParent, "TOPLEFT", 20, -77)
+	battlenet:CreatePanel(battlenet, 235, 23, "TOPLEFT", UIParent, "TOPLEFT", 11, -7)
 	battlenet:SetClampedToScreen(true)
 	battlenet:CreateShadow(battlenet)
 	battlenet:SetFrameLevel(2)
