@@ -299,8 +299,8 @@ local function Shared(self, unit)
 				local Experience = CreateFrame("StatusBar", self:GetName().."_Experience", self)
 				Experience:SetStatusBarTexture(normTex)
 				Experience:SetStatusBarColor(0, 0.4, 1, .8)
-				Experience:Size(Tukuicpanellogo:GetWidth() -2, 19)
-				Experience:Point("LEFT", Tukuicuberight, "RIGHT", 5, 0)
+				Experience:Size(TukuiBar1:GetWidth() -4, 15)
+				Experience:Point("TOP", TukuiBar1, "BOTTOM", 0, -6)
 				Experience:SetFrameLevel(10)
 				Experience.Tooltip = true
 				self.Experience = Experience
@@ -341,8 +341,8 @@ local function Shared(self, unit)
 			if T.level == MAX_PLAYER_LEVEL then
 				local Reputation = CreateFrame("StatusBar", self:GetName().."_Reputation", self)
 				Reputation:SetStatusBarTexture(normTex)
-				Reputation:Size(Tukuicpanellogo:GetWidth() -2, 19)
-				Reputation:Point("LEFT", Tukuicuberight, "RIGHT", 5, 0)
+				Reputation:Size(TukuiBar1:GetWidth() -4, 15)
+				Reputation:Point("TOP", TukuiBar1, "BOTTOM", 0, -6)
 				Reputation:SetFrameLevel(10)
 				local ReputationBG = Reputation:CreateTexture(nil, 'BORDER')
 				ReputationBG:SetAllPoints()
@@ -1748,32 +1748,33 @@ do
 	UnitPopupMenus["FOCUS"] = { "RAID_TARGET_ICON", "CANCEL" }
 	UnitPopupMenus["BOSS"] = { "RAID_TARGET_ICON", "CANCEL" }
 end
+
 --[[
 --Just an experimental Thing....Dont Mind it.
 -- Unitframe Lines
 local line2 = CreateFrame("Frame", "Tukuiline2", TukuiTarget)
-Tukuiline2:CreatePanel(line2, 269, 10, "LEFT", Tukuiline1, "RIGHT", 124, 7)
+Tukuiline2:CreatePanel(line2, 270, 4, "LEFT", Tukuiline1, "RIGHT", 120, 5)
 --Tukuiline2:CreateShadow(line1)
-line2:SetFrameLevel(10)
-line2:SetFrameStrata("LOW")
+line2:SetFrameLevel(0)
+line2:SetFrameStrata("BACKGROUND")
 
 -- Unitframe Lines
 local line3 = CreateFrame("Frame", "Tukuiline3", TukuiTarget)
-Tukuiline3:CreatePanel(line2, 269, 10, "BOTTOM", Tukuiline2, "BOTTOM", 0, -40)
+Tukuiline3:CreatePanel(line2, 270, 4, "BOTTOM", Tukuiline2, "BOTTOM", 0, -30)
 --Tukuiline3:CreateShadow(line1)
-line3:SetFrameLevel(10)
-line3:SetFrameStrata("LOW")
+line3:SetFrameLevel(0)
+line3:SetFrameStrata("BACKGROUND")
 
 -- Unitframe Lines
 local line4 = CreateFrame("Frame", "Tukuiline4", TukuiTarget)
-Tukuiline4:CreatePanel(line4, 10, 47, "RIGHT", Tukuiline2, "LEFT", 0, -20)
+Tukuiline4:CreatePanel(line4, 4, 34, "RIGHT", Tukuiline2, "LEFT", 2, -15)
 --Tukuiline4:CreateShadow(line1)
 line4:SetFrameLevel(0)
 line4:SetFrameStrata("BACKGROUND")
 
 -- Unitframe Lines
 local line5 = CreateFrame("Frame", "Tukuiline5", TukuiTarget)
-Tukuiline5:CreatePanel(line5, 10, 47, "LEFT", Tukuiline2, "RIGHT", 0, -20)
+Tukuiline5:CreatePanel(line5, 4, 34, "LEFT", Tukuiline2, "RIGHT", -2, -15)
 --Tukuiline5:CreateShadow(line1)
 line5:SetFrameLevel(0)
 line5:SetFrameStrata("BACKGROUND")

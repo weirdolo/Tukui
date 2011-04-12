@@ -1,7 +1,7 @@
 ﻿local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
 local TukuiBar1 = CreateFrame("Frame", "TukuiBar1", UIParent, "SecureHandlerStateTemplate")
-TukuiBar1:CreatePanel("Default", 1, 1, "BOTTOM", UIParent, "BOTTOM", 0, 46)
+TukuiBar1:CreatePanel("Default", 1, 1, "BOTTOM", UIParent, "BOTTOM", 0, 52)
 TukuiBar1:CreateShadow("Default")
 TukuiBar1:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 13))
 TukuiBar1:SetHeight((T.buttonsize * 2) + (T.buttonspacing * 3))
@@ -36,7 +36,7 @@ else
 end
 
 local TukuiBar4 = CreateFrame("Frame", "TukuiBar4", UIParent)
-TukuiBar4:CreatePanel("Default", 1, 1, "BOTTOM", UIParent, "BOTTOM", 0, 46)
+TukuiBar4:CreatePanel("Default", 1, 1, "BOTTOM", UIParent, "BOTTOM", 0, 52)
 TukuiBar4:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 13))
 TukuiBar4:SetHeight((T.buttonsize * 2) + (T.buttonspacing * 3))
 TukuiBar4:SetFrameStrata("BACKGROUND")
@@ -44,7 +44,6 @@ TukuiBar4:SetFrameLevel(2)
 TukuiBar4:SetAlpha(0)
 
 local TukuiBar5 = CreateFrame("Frame", "TukuiBar5", UIParent)
---TukuiBar5:CreatePanel("Default", 1, 1, "CENTER", UIParent, "CENTER", 760, -330)
 TukuiBar5:CreatePanel("Default", 1, 1,"TOPRIGHT", UIParent, "TOPRIGHT", -12, -853)
 TukuiBar5:CreateShadow("Default")
 TukuiBar5:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 13))
@@ -52,6 +51,18 @@ TukuiBar5:SetHeight((T.buttonsize * 1) + (T.buttonspacing * 2))
 TukuiBar5:SetFrameStrata("BACKGROUND")
 TukuiBar5:SetFrameLevel(2)
 TukuiBar5:SetAlpha(0)
+
+--[[
+local TukuiBar5 = CreateFrame("Frame", "TukuiBar5", TukuiChatBackgroundRight)
+--TukuiBar5:SetWidth(T.DataWidth + 2)
+TukuiBar5:CreateShadow("Default")
+TukuiBar5:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 13))
+TukuiBar5:SetHeight((T.buttonsize * 1) + (T.buttonspacing * 2))
+TukuiBar5:Point("BOTTOM", TukuiChatBackgroundRight, "TOP", -2, 0)
+TukuiBar5:SetFrameStrata("BACKGROUND")
+TukuiBar5:SetFrameLevel(2)
+TukuiBar5:SetAlpha(0)
+--]]
 
 local TukuiBar6 = CreateFrame("Frame", "TukuiBar6", UIParent)
 TukuiBar6:SetWidth((T.buttonsize * 1) + (T.buttonspacing * 2))
@@ -70,7 +81,7 @@ TukuiBar7:SetFrameLevel(2)
 TukuiBar7:SetAlpha(0)
 
 local petbg = CreateFrame("Frame", "TukuiPetBar", UIParent, "SecureHandlerStateTemplate")
-petbg:CreatePanel("Default", (T.petbuttonsize * 10) + (T.petbuttonspacing * 11), T.petbuttonsize + (T.petbuttonspacing * 2), "TOP", TukuiBar1, "BOTTOM", 0, -6)
+petbg:CreatePanel("Default", (T.petbuttonsize * 10) + (T.petbuttonspacing * 11), T.petbuttonsize + (T.petbuttonspacing * 2), "RIGHT", TukuiBar5, "LEFT", -6, 0)
 petbg:CreateShadow("Default")
 petbg:SetAlpha(0)
 
@@ -80,6 +91,18 @@ ltpetbg1:CreateShadow("Default")
 ltpetbg1:SetParent(petbg)
 ltpetbg1:SetFrameStrata("BACKGROUND")
 ltpetbg1:SetFrameLevel(0)
+
+local AsphyxiaPetBar = CreateFrame("Frame")
+local function AsphyxiaPetBarUpdate(self)
+	if TukuiBar5 and TukuiBar5:IsShown() then
+		petbg:ClearAllPoints()
+		petbg:SetPoint("BOTTOMRIGHT", TukuiBar5, "TOPRIGHT", 0, 3)
+	else
+		petbg:ClearAllPoints()
+		petbg:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -12, -853)
+	end
+end
+AsphyxiaPetBar:SetScript("OnUpdate", AsphyxiaPetBarUpdate)
 
 -- INVISIBLE FRAME COVERING BOTTOM ACTIONBARS JUST TO PARENT UF CORRECTLY
 local invbarbg = CreateFrame("Frame", "InvTukuiActionBarBackground", UIParent)
@@ -212,16 +235,17 @@ end
 
 -- INFO CENTER BOTTOM (FOR STATS)
 local icenterbottom = CreateFrame("Frame", "TukuiInfoCenterBottom", UIParent)
-icenterbottom:CreatePanel("Default", 130, 17, "LEFT", TukuiInfoLeft, "RIGHT", 9, -9)
+icenterbottom:CreatePanel("Default", 190, 18, "TOP", TukuiBar2, "BOTTOM", 0, -5)
+icenterbottom:Point("CENTER", UIParent, "CENTER", 0, -5)
 icenterbottom:CreateShadow("Default")
-icenterbottom:SetFrameLevel(0)
+icenterbottom:SetFrameLevel(2)
 icenterbottom:SetFrameStrata("BACKGROUND")
 
 -- INFO CENTER BOTTOM RIGHT(FOR STATS)
 local icenterbottomright = CreateFrame("Frame", "TukuiInfoCenterBottomRight", UIParent)
-icenterbottomright:CreatePanel("Default", 130, 17, "RIGHT", TukuiInfoRight, "LEFT", -9, -9)
+icenterbottomright:CreatePanel("Default", 190, 18, "TOP", TukuiBar3, "BOTTOM", 0, -5)
 icenterbottomright:CreateShadow("Default")
-icenterbottomright:SetFrameLevel(0)
+icenterbottomright:SetFrameLevel(2)
 icenterbottomright:SetFrameStrata("BACKGROUND")
 
 --[[-- MINIMAP INFO LEFT(FOR STATS)
@@ -238,7 +262,7 @@ irmmap:SetFrameLevel(TukuiMinimap:GetFrameLevel() + 2)]]
 
 -- CONFIG BUTTON
 local configbutton = CreateFrame("Button", "TukuiConfigButton", UIParent, "SecureActionButtonTemplate")
-configbutton:CreatePanel("Default", 55, 17, "TOPLEFT", UIParent, "TOPLEFT", 20, -34)
+configbutton:CreatePanel("Default", 55, 17, "TOP", TukuiBar1, "BOTTOM", -142, -22)
 configbutton:CreateShadow("Default")
 configbutton:SetAttribute("type", "macro")
 configbutton:SetAttribute("macrotext", "/tc")
@@ -270,7 +294,7 @@ moveuibutton:HookScript("OnLeave", function(self) moveuibutton:SetBackdropBorder
 
 -- RESETUI BUTTON
 local resetuibutton = CreateFrame("Button", "TukuiResetUIButton", UIParent, "SecureActionButtonTemplate")
-resetuibutton:CreatePanel("Default", 55, 17, "LEFT", moveuibutton, "RIGHT", 5, 0)
+resetuibutton:CreatePanel("Default", 55, 17, "TOP", TukuiBar1, "BOTTOM", 82, -22)
 resetuibutton:CreateShadow("Default")
 resetuibutton:SetAttribute("type", "macro")
 resetuibutton:SetAttribute("macrotext", "/resetui")
@@ -302,7 +326,7 @@ rluibutton:HookScript("OnLeave", function(self) rluibutton:SetBackdropBorderColo
 
 -- ADDONS BUTTON
 local adbutton = CreateFrame("Button", "TukuiAddonsButton", UIParent, "SecureActionButtonTemplate")
-adbutton:CreatePanel("Default", 115, 17, "TOP", moveuibutton, "BOTTOM", 30, -5)
+adbutton:CreatePanel("Default", 100, 17, "TOP", TukuiBar1, "BOTTOM", 0, -22)
 adbutton:CreateShadow("Default")
 adbutton:SetAttribute("type", "macro")
 adbutton:SetAttribute("macrotext", "/al")
@@ -316,6 +340,36 @@ adbutton.Text:SetText(T.StatColor..ADDONS)
 adbutton:HookScript("OnEnter", function(self) adbutton:SetBackdropBorderColor(unpack(TukuiCF["media"].statcolor)) end)
 adbutton:HookScript("OnLeave", function(self) adbutton:SetBackdropBorderColor(unpack(TukuiCF["media"].bordercolor)) end)
 
+-- DPS BUTTON
+local dpsb = CreateFrame("Button", "TukuiDPSButton", UIParent)
+local buttontext = dpsb:CreateFontString(nil,"OVERLAY",nil)
+buttontext:SetFont(C.media.pixelfont, C["datatext"].fontsize)
+buttontext:SetText(T.StatColor.."Dps")
+buttontext:SetPoint("CENTER", TukuiDB.Scale(2), 0.5)
+TukuiDPSButton:CreatePanel(dpsb, 30, 17, "TOP", Minimap, "BOTTOM", 54, 4)
+TukuiDPSButton:CreateShadow(dpsb)
+dpsb:SetFrameLevel(3)
+dpsb:EnableMouse(true)
+
+dpsb:HookScript("OnEnter", function(self) dpsb:SetBackdropBorderColor(unpack(TukuiCF["media"].statcolor)) end)
+dpsb:HookScript("OnLeave", function(self) dpsb:SetBackdropBorderColor(unpack(TukuiCF["media"].bordercolor)) end)
+dpsb:RegisterForClicks("AnyUp") dpsb:SetScript("OnClick", function() DisableAddOn("Tukui_Raid_Healing") EnableAddOn("Tukui_Raid") ReloadUI() end)
+
+-- HEAL BUTTON
+local healb = CreateFrame("Button", "TukuiHEALButton", UIParent)
+local buttontext = healb:CreateFontString(nil,"OVERLAY",nil)
+buttontext:SetFont(C.media.pixelfont, C["datatext"].fontsize)
+buttontext:SetText(T.StatColor.."Heal")
+buttontext:SetPoint("CENTER", TukuiDB.Scale(2), 0.5)
+TukuiHEALButton:CreatePanel(healb, 30, 17, "TOP", Minimap, "BOTTOM", -54, 4)
+TukuiHEALButton:CreateShadow(healb)
+healb:SetFrameLevel(3)
+healb:EnableMouse(true)
+
+healb:HookScript("OnEnter", function(self) healb:SetBackdropBorderColor(unpack(TukuiCF["media"].statcolor)) end)
+healb:HookScript("OnLeave", function(self) healb:SetBackdropBorderColor(unpack(TukuiCF["media"].bordercolor)) end)
+healb:RegisterForClicks("AnyUp") healb:SetScript("OnClick", function() EnableAddOn("Tukui_Raid_Healing") DisableAddOn("Tukui_Raid") ReloadUI() end)
+	
 --Commenting them out for now...	
 --[[-- TOP STAT FRAMES
 local topstatbar1 = CreateFrame("Frame", "TukuiTopStat1", UIParent)
@@ -358,7 +412,8 @@ local timeright = CreateFrame("Button", "Tukuitimeright", UIParent)
 	tile = false, tileSize = 0, edgeSize = 1, 
 	insets = { left = -1, right = -1, top = -1, bottom = -1}
 	})
-	timeright:SetBackdropBorderColor(unpack(C["media"].bordercolor))]]	
+	timeright:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+--]]
 	
 -- TIME PANEL
 local watch = CreateFrame("Frame", "Tukuiwatch", UIParent)
@@ -366,9 +421,11 @@ Tukuiwatch:CreatePanel(watch, 73, 23, "TOP", Minimap, "BOTTOM", TukuiDB.Scale(0)
 Tukuiwatch:CreateShadow(watch)
 watch:SetFrameLevel(3)
 
+--[[
 --UI CONTROL PANEL
 local cpanellogo = CreateFrame("Button", "Tukuicpanellogo", UIParent)
-	cpanellogo:CreatePanel("Default",235, 23, "TOPLEFT", UIParent, "TOPLEFT", 20, -7)
+	--cpanellogo:CreatePanel("Default",235, 23, "TOPLEFT", UIParent, "TOPLEFT", 20, -7)
+	cpanellogo:CreatePanel("Default",235, 17, "TOP", TukuiBar1, "BOTTOM", 0, -6)
 	cpanellogo:CreateShadow(cpanellogo)
 	cpanellogo:SetFrameLevel(2)
 	cpanellogo:SetFrameStrata("BACKGROUND")
@@ -379,7 +436,9 @@ local cpanellogo = CreateFrame("Button", "Tukuicpanellogo", UIParent)
 	insets = { left = -1, right = -1, top = -1, bottom = -1}
 	})
 	cpanellogo:SetBackdropBorderColor(unpack(C["media"].bordercolor))
-	
+--]]	
+
+--[[	
 -- CUBE LEFT (Control Panel Left)
 local cubeleft = CreateFrame("Frame", "Tukuicubeleft", UIParent)
 cubeleft:CreatePanel(cubeleft, TukuiDB.Scale(10), 23, "RIGHT", Tukuicpanellogo, "LEFT", -TukuiDB.Scale(3), 0)
@@ -397,35 +456,64 @@ local cuberight = CreateFrame("Frame", "Tukuicuberight", UIParent)
 cuberight:CreatePanel(cuberight, TukuiDB.Scale(10), 23, "LEFT", Tukuicpanellogo, "RIGHT", TukuiDB.Scale(256), 0)
 cuberight:CreateShadow(cuberight)
 cuberight:SetFrameLevel(2)	
+--]]
 
--- DPS BUTTON
-local dpsb = CreateFrame("Button", "TukuiDPSButton", UIParent)
-local buttontext = dpsb:CreateFontString(nil,"OVERLAY",nil)
-buttontext:SetFont(C.media.pixelfont, C["datatext"].fontsize)
-buttontext:SetText("DPS Layout")
-buttontext:SetText(T.StatColor.."Dps UI")
-buttontext:SetPoint("CENTER", TukuiDB.Scale(2), 0.5)
-TukuiDPSButton:CreatePanel(dpsb, 55, 17, "LEFT", adbutton, "RIGHT", 5, 0)
-TukuiDPSButton:CreateShadow(dpsb)
-dpsb:SetFrameLevel(2)
-dpsb:EnableMouse(true)
+-- Toggle Button for TukuiInfoCenterBottom
+local centerbtoggle = CreateFrame("Button", "CenterBToggle", UIParent)
+local centerbtext = centerbtoggle:CreateFontString(nil, "OVERLAY", nil)
+centerbtext:SetFont(C.media.pixelfont, C["datatext"].fontsize)
+centerbtext:SetText(T.StatColor..">")
+centerbtext:SetPoint("CENTER", 2, 1)
+centerbtoggle:CreatePanel(centerbtoggle, 17, 18, "LEFT", TukuiInfoCenterBottom, "LEFT", -20, 0)
+centerbtoggle:SetFrameLevel(2)
+centerbtoggle:SetAlpha(0)
+centerbtoggle:CreateShadow("Default")
+		
+-- Make Button Toggle TukuiInfoCenterBottom Show/Hide
+centerbtoggle:HookScript("OnEnter", function(self) centerbtoggle:SetBackdropBorderColor(unpack(C["media"].statcolor)) end)
+centerbtoggle:HookScript("OnLeave", function(self) centerbtoggle:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
+centerbtoggle:RegisterForClicks("AnyUp") 
+	
+centerbtoggle:SetScript("OnClick", function()
+	if icenterbottom:IsShown() then
+		icenterbottom:Hide()
+		centerbtext:SetText(T.StatColor.."<")
+	else
+		icenterbottom:Show()
+		UIFrameFadeIn(icenterbottom, 0.6, 0, 1)
+		centerbtext:SetText(T.StatColor..">")
+	end
+end)	
 
-dpsb:HookScript("OnEnter", function(self) dpsb:SetBackdropBorderColor(unpack(TukuiCF["media"].statcolor)) end)
-dpsb:HookScript("OnLeave", function(self) dpsb:SetBackdropBorderColor(unpack(TukuiCF["media"].bordercolor)) end)
-dpsb:RegisterForClicks("AnyUp") dpsb:SetScript("OnClick", function() DisableAddOn("Tukui_Raid_Healing") EnableAddOn("Tukui_Raid") ReloadUI() end)
+centerbtoggle:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
+centerbtoggle:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 
--- HEAL BUTTON
-local healb = CreateFrame("Button", "TukuiHEALButton", UIParent)
-local buttontext = healb:CreateFontString(nil,"OVERLAY",nil)
-buttontext:SetFont(C.media.pixelfont, C["datatext"].fontsize)
-buttontext:SetText("Heal Layout")
-buttontext:SetText(T.StatColor.."Heal UI")
-buttontext:SetPoint("CENTER", TukuiDB.Scale(2), 0.5)
-TukuiHEALButton:CreatePanel(healb, 55, 17, "RIGHT", adbutton, "LEFT", -5, 0)
-TukuiHEALButton:CreateShadow(healb)
-healb:SetFrameLevel(2)
-healb:EnableMouse(true)
+-- Toggle Button for TukuiInfoCenterBottomRight
+local centerbrtoggle = CreateFrame("Button", "CenterBRToggle", UIParent)
+local centerbrtext = centerbrtoggle:CreateFontString(nil, "OVERLAY", nil)
+centerbrtext:SetFont(C.media.pixelfont, C["datatext"].fontsize)
+centerbrtext:SetText(T.StatColor.."<")
+centerbrtext:SetPoint("CENTER", 2, 1)
+centerbrtoggle:CreatePanel(centerbrtoggle, 17, 18, "RIGHT", TukuiInfoCenterBottomRight, "RIGHT", 20, 0)
+centerbrtoggle:SetFrameLevel(2)
+centerbrtoggle:SetAlpha(0)
+centerbrtoggle:CreateShadow("Default")
+		
+-- Make Button Toggle Main Frame On/Off
+centerbrtoggle:HookScript("OnEnter", function(self) centerbrtoggle:SetBackdropBorderColor(unpack(C["media"].statcolor)) end)
+centerbrtoggle:HookScript("OnLeave", function(self) centerbrtoggle:SetBackdropBorderColor(unpack(C["media"].bordercolor)) end)
+centerbrtoggle:RegisterForClicks("AnyUp") 
+	
+centerbrtoggle:SetScript("OnClick", function()
+	if icenterbottomright:IsShown() then
+		icenterbottomright:Hide()
+		centerbrtext:SetText(T.StatColor..">")
+	else
+		icenterbottomright:Show()
+		UIFrameFadeIn(icenterbottomright, 0.6, 0, 1)
+		centerbrtext:SetText(T.StatColor.."<")
+	end
+end)	
 
-healb:HookScript("OnEnter", function(self) healb:SetBackdropBorderColor(unpack(TukuiCF["media"].statcolor)) end)
-healb:HookScript("OnLeave", function(self) healb:SetBackdropBorderColor(unpack(TukuiCF["media"].bordercolor)) end)
-healb:RegisterForClicks("AnyUp") healb:SetScript("OnClick", function() EnableAddOn("Tukui_Raid_Healing") DisableAddOn("Tukui_Raid") ReloadUI() end)
+centerbrtoggle:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
+centerbrtoggle:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
