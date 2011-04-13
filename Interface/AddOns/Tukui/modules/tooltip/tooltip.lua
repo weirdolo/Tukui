@@ -82,7 +82,7 @@ local function UpdateTooltip(self)
 	end
 	
 
-	if self:GetAnchorType() == "ANCHOR_NONE" and TukuiTooltipAnchor then
+if self:GetAnchorType() == "ANCHOR_NONE" and TukuiTooltipAnchor then
 		local point = TukuiTooltipAnchor:GetPoint()
 		if point == "TOPLEFT" then
 			self:ClearAllPoints()
@@ -100,20 +100,19 @@ local function UpdateTooltip(self)
 			if TukuiBags and TukuiBags:IsShown() then
 				self:ClearAllPoints()
 				self:SetPoint("BOTTOMRIGHT", TukuiBags, "TOPRIGHT", 0, x)
-		elseif TukuiBar5 and TukuiBar5:IsShown() then
-				self:ClearAllPoints()
-				self:SetPoint("BOTTOMRIGHT", TukuiBar5, "TOPRIGHT", 0, x)	
-		elseif HasPetUI() then
-				self:ClearAllPoints()
-				self:SetPoint("BOTTOMRIGHT", TukuiPetBar, "TOPRIGHT", 0, x)
+			elseif HasPetUI() then
+					self:ClearAllPoints()
+					self:SetPoint("BOTTOMRIGHT", TukuiPetBar, "TOPRIGHT", 0, x)
+			elseif TukuiBar5 and TukuiBar5:IsShown() then
+					self:ClearAllPoints()
+					self:SetPoint("BOTTOMRIGHT", TukuiBar5, "TOPRIGHT", 0, x)	
 			else	
 				self:ClearAllPoints()
 				self:SetPoint("BOTTOMRIGHT", TukuiTooltipAnchor, "TOPRIGHT", 0, x)
 			end	
 		end	
-	end			
+	end
 end
-
 
 hooksecurefunc("GameTooltip_SetDefaultAnchor", function(self, parent)
 	if C["tooltip"].cursor == true then

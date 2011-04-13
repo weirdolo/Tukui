@@ -76,6 +76,26 @@ local function Shared(self, unit)
 	self:Tag(name, "[Tukui:getnamecolor][Tukui:nameshort]")
 	self.Name = name
 	
+	local leader = health:CreateTexture(nil, "OVERLAY")
+    leader:Height(12*T.raidscale)
+    leader:Width(12*T.raidscale)
+    leader:SetPoint("TOPLEFT", 0, 6)
+	self.Leader = leader
+	
+    local LFDRole = health:CreateTexture(nil, "OVERLAY")
+    LFDRole:Height(6*T.raidscale)
+    LFDRole:Width(6*T.raidscale)
+	LFDRole:Point("TOPRIGHT", -2, -2)
+	LFDRole:SetTexture("Interface\\AddOns\\Tukui\\medias\\textures\\lfdicons.blp")
+	self.LFDRole = LFDRole
+	
+    local MasterLooter = health:CreateTexture(nil, "OVERLAY")
+    MasterLooter:Height(12*T.raidscale)
+    MasterLooter:Width(12*T.raidscale)
+	self.MasterLooter = MasterLooter
+    self:RegisterEvent("PARTY_LEADER_CHANGED", T.MLAnchorUpdate)
+    self:RegisterEvent("PARTY_MEMBERS_CHANGED", T.MLAnchorUpdate)
+	
 	if C["unitframes"].showsymbols == true then
 		RaidIcon = health:CreateTexture(nil, 'OVERLAY')
 		RaidIcon:Height(14*T.raidscale)
