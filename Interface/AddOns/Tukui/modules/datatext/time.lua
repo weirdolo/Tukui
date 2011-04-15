@@ -12,7 +12,7 @@ local timerShortFormat = "%d:%02d"
 local lockoutInfoFormat = "%s |cffaaaaaa(%s%s, %s/%s)"
 local formatBattleGroundInfo = "%s: "
 local lockoutColorExtended, lockoutColorNormal = { r=0.3,g=1,b=0.3 }, { r=1,g=1,b=1 }
-local difficultyInfo = { "Н", "Н", "Г", "Г" }
+local difficultyInfo = { "Н", "Н", "T", "T" }
 local curHr, curMin, curAmPm
 
 local Stat = CreateFrame("Frame")
@@ -96,7 +96,7 @@ local function formatResetTime(sec,table)
 	local table = table or {}
 	local d,h,m,s = ChatFrame_TimeBreakDown(floor(sec))
 	local string = gsub(gsub(format(" %dd %dh %dm "..((d==0 and h==0) and "%ds" or ""),d,h,m,s)," 0[dhms]"," "),"%s+"," ")
-	local string = strtrim(gsub(string, "([dhms])", {d=table.days or "д",h=table.hours or "ч",m=table.minutes or "м",s=table.seconds or "с"})," ")
+	local string = strtrim(gsub(string, "([dhms])", {d=table.days or "D",h=table.hours or "H",m=table.minutes or "M",s=table.seconds or "S"})," ")
 	return strmatch(string,"^%s*$") and "0"..(table.seconds or L"s") or string
 end
 

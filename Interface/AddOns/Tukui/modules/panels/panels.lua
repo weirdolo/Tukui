@@ -43,27 +43,6 @@ TukuiBar4:SetFrameStrata("BACKGROUND")
 TukuiBar4:SetFrameLevel(2)
 TukuiBar4:SetAlpha(0)
 
-local TukuiBar5 = CreateFrame("Frame", "TukuiBar5", UIParent)
-TukuiBar5:CreatePanel("Default", 1, 1,"TOPRIGHT", UIParent, "TOPRIGHT", -12, -853)
-TukuiBar5:CreateShadow("Default")
-TukuiBar5:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 13))
-TukuiBar5:SetHeight((T.buttonsize * 1) + (T.buttonspacing * 2))
-TukuiBar5:SetFrameStrata("BACKGROUND")
-TukuiBar5:SetFrameLevel(2)
-TukuiBar5:SetAlpha(0)
-
---[[
-local TukuiBar5 = CreateFrame("Frame", "TukuiBar5", TukuiChatBackgroundRight)
---TukuiBar5:SetWidth(T.DataWidth + 2)
-TukuiBar5:CreateShadow("Default")
-TukuiBar5:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 13))
-TukuiBar5:SetHeight((T.buttonsize * 1) + (T.buttonspacing * 2))
-TukuiBar5:Point("BOTTOM", TukuiChatBackgroundRight, "TOP", -2, 0)
-TukuiBar5:SetFrameStrata("BACKGROUND")
-TukuiBar5:SetFrameLevel(2)
-TukuiBar5:SetAlpha(0)
---]]
-
 local TukuiBar6 = CreateFrame("Frame", "TukuiBar6", UIParent)
 TukuiBar6:SetWidth((T.buttonsize * 1) + (T.buttonspacing * 2))
 TukuiBar6:SetHeight((T.buttonsize * 12) + (T.buttonspacing * 13))
@@ -190,33 +169,41 @@ iright:CreatePanel("Default", T.InfoLeftRightWidth, 23, "RIGHT", ltoabr, "RIGHT"
 iright:SetFrameLevel(2)
 iright:SetFrameStrata("BACKGROUND")
 
-if C.chat.background then
-	-- Alpha horizontal lines because all panels is dependent on this frame.
-	ltoabl:SetAlpha(0)
-	ltoabr:SetAlpha(0)
+-- Alpha horizontal lines because all panels is dependent on this frame.
+ltoabl:SetAlpha(0)
+ltoabr:SetAlpha(0)
 	
-	-- CHAT BG LEFT
-	local chatleftbg = CreateFrame("Frame", "TukuiChatBackgroundLeft", TukuiInfoLeft)
-	chatleftbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 175, "BOTTOM", TukuiInfoLeft, "BOTTOM", 0, -6)
-	chatleftbg:CreateShadow("Default")
+-- CHAT BG LEFT
+local chatleftbg = CreateFrame("Frame", "TukuiChatBackgroundLeft", TukuiInfoLeft)
+chatleftbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 175, "BOTTOM", TukuiInfoLeft, "BOTTOM", 0, -6)
+chatleftbg:CreateShadow("Default")
+
+-- CHAT BG RIGHT
+local chatrightbg = CreateFrame("Frame", "TukuiChatBackgroundRight", TukuiInfoRight)
+chatrightbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 175, "BOTTOM", TukuiInfoRight, "BOTTOM", 0, -6)
+chatrightbg:CreateShadow("Default")
 	
-	-- CHAT BG RIGHT
-	local chatrightbg = CreateFrame("Frame", "TukuiChatBackgroundRight", TukuiInfoRight)
-	chatrightbg:CreatePanel("Transparent", T.InfoLeftRightWidth + 12, 175, "BOTTOM", TukuiInfoRight, "BOTTOM", 0, -6)
-	chatrightbg:CreateShadow("Default")
-	
-	-- LEFT TAB PANEL
-	local tabsbgleft = CreateFrame("Frame", "TukuiTabsLeftBackground", TukuiBar1)
-	tabsbgleft:CreatePanel("Default", 325, 23, "TOP", chatleftbg, "TOP", -22, -6)
-	tabsbgleft:SetFrameLevel(2)
-	tabsbgleft:SetFrameStrata("BACKGROUND")
+-- LEFT TAB PANEL
+local tabsbgleft = CreateFrame("Frame", "TukuiTabsLeftBackground", TukuiBar1)
+tabsbgleft:CreatePanel("Default", 325, 23, "TOP", chatleftbg, "TOP", -22, -6)
+tabsbgleft:SetFrameLevel(2)
+tabsbgleft:SetFrameStrata("BACKGROUND")
 		
-	-- RIGHT TAB PANEL
-	local tabsbgright = CreateFrame("Frame", "TukuiTabsRightBackground", TukuiBar1)
-	tabsbgright:CreatePanel("Default", 325, 23, "TOP", chatrightbg, "TOP", -22, -6)
-	tabsbgright:SetFrameLevel(2)
-	tabsbgright:SetFrameStrata("BACKGROUND")
-end
+-- RIGHT TAB PANEL
+local tabsbgright = CreateFrame("Frame", "TukuiTabsRightBackground", TukuiBar1)
+tabsbgright:CreatePanel("Default", 325, 23, "TOP", chatrightbg, "TOP", -22, -6)
+tabsbgright:SetFrameLevel(2)
+tabsbgright:SetFrameStrata("BACKGROUND")
+	
+local TukuiBar5 = CreateFrame("Frame", "TukuiBar5", chatrightbg)
+TukuiBar5:SetTemplate("Default")
+TukuiBar5:CreateShadow("Default")
+TukuiBar5:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 13))
+TukuiBar5:SetHeight((T.buttonsize * 1) + (T.buttonspacing * 2))
+TukuiBar5:Point("BOTTOM", TukuiChatBackgroundRight, "TOP", 0, 3)
+TukuiBar5:SetFrameStrata("BACKGROUND")
+TukuiBar5:SetFrameLevel(2)
+TukuiBar5:SetAlpha(0)
 
 --BATTLEGROUND STATS FRAME
 if C["datatext"].battleground == true then

@@ -89,7 +89,7 @@ L.Slots = {
 }
 
 L.popup_disableui = "Tukui doesn't work for this resolution, do you want to disable |cff0066FFTukui Asphyxia's Edit|r? (Cancel if you want to try another resolution)"
-L.popup_install = "First time running |cff3300FFTukui Asphyxia's Edit|r, version 1.1.4"..T.asphyxiarelease.." with this Character. You must reload your UI to set Action Bars, Variables and Chat Frames."
+L.popup_install = "First time running |cff3300FFTukui Asphyxia's Edit|r, version 1.1.5"..T.asphyxiarelease.." with this Character. You must reload your UI to set Action Bars, Variables and Chat Frames."
 L.popup_reset = "Warning! This will reset everything to |cff0066FFTukui Asphyxia's Edit|r default. Do you want to proceed?"
 L.popup_2raidactive = "2 raid layouts are active, please select a layout."
 L.popup_install_yes = "Yeah! (recommended!)"
@@ -152,7 +152,7 @@ L.core_autoinv_enable_c = "Autoinvite ON: "
 L.core_autoinv_disable = "Autoinvite OFF"
 L.core_wf_unlock = "WatchFrame unlock"
 L.core_wf_lock = "WatchFrame lock"
-L.core_welcome1 = "Hey, |cffFF6347"..myPlayerName.."|r. Welcome to |cff0066FFTukui Asphyxia's Edit|r, version 1.1.4"
+L.core_welcome1 = "Hey, |cffFF6347"..myPlayerName.."|r. Welcome to |cff0066FFTukui Asphyxia's Edit|r, version 1.1.5"
 L.core_welcome2 = "Type |cff0066FF/uihelp|r for more info, |cff0066FF/changelog|r to see changes or visit www.tukui.org"
 
 L.core_uihelp1 = "|cff00ff00General Slash Commands|r"

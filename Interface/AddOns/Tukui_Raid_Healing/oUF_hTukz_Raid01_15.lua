@@ -1,10 +1,3 @@
-local ADDON_NAME, ns = ...
-local oUF = oUFTukui or oUF
-assert(oUF, "Tukui was unable to locate oUF install.")
-
-ns._Objects = {}
-ns._Headers = {}
-
 local T, C, L = unpack(Tukui) -- Import: T - functions, constants, variables; C - config; L - locales
 if not C["unitframes"].enable == true or C["unitframes"].gridonly == true then return end
 
@@ -21,7 +14,7 @@ local function Shared(self, unit)
 	self.menu = T.SpawnMenu
 	
 	self:SetBackdrop({bgFile = C["media"].blank, insets = {top = -T.mult, left = -T.mult, bottom = -T.mult, right = -T.mult}})
-	self:SetBackdropColor(0, 0, 0)
+	self:SetBackdropColor(0.1, 0.1, 0.1)
 	
 	local health = CreateFrame('StatusBar', nil, self)
 	health:SetPoint("TOPLEFT")
@@ -33,7 +26,7 @@ local function Shared(self, unit)
 	health.bg = health:CreateTexture(nil, 'BORDER')
 	health.bg:SetAllPoints(health)
 	health.bg:SetTexture(normTex)
-	health.bg:SetTexture(.150, .150, .150)
+	health.bg:SetTexture(0.3, 0.3, 0.3)
 	health.bg.multiplier = 0.3
 	self.Health.bg = health.bg
 		
@@ -51,8 +44,8 @@ local function Shared(self, unit)
 	if C.unitframes.unicolor == true then
 		health.colorDisconnected = false
 		health.colorClass = false
-		health:SetStatusBarColor(.150, .150, .150, 1)
-		health.bg:SetVertexColor(0, 0, 0, 1)		
+		health:SetStatusBarColor(.3, .3, .3, 1)
+		health.bg:SetVertexColor(.1, .1, .1, 1)		
 	else
 		health.colorDisconnected = true
 		health.colorClass = true
@@ -97,9 +90,9 @@ local function Shared(self, unit)
 	self.Leader = leader
 	
     local LFDRole = health:CreateTexture(nil, "OVERLAY")
-    LFDRole:Height(56*T.raidscale)
-    LFDRole:Width(56*T.raidscale)
-	LFDRole:Point("TOPRIGHT", -2, -2)
+    LFDRole:Height(10*T.raidscale)
+    LFDRole:Width(10*T.raidscale)
+	LFDRole:Point("TOP", 0, 5)
 	LFDRole:SetTexture("Interface\\AddOns\\Tukui\\medias\\textures\\lfdicons.blp")
 	self.LFDRole = LFDRole
 	
@@ -200,11 +193,10 @@ oUF:Factory(function(self)
 		self:SetWidth(header:GetAttribute('initial-width'))
 		self:SetHeight(header:GetAttribute('initial-height'))
 	]],
-	'initial-width', T.Scale(150*T.raidscale),
+	'initial-width', T.Scale(160*T.raidscale),
 	'initial-height', T.Scale(32*T.raidscale),	
 	"showParty", true, "showPlayer", C["unitframes"].showplayerinparty, "showRaid", true, "groupFilter", "1,2,3,4,5,6,7,8", "groupingOrder", "1,2,3,4,5,6,7,8", "groupBy", "GROUP", "yOffset", T.Scale(-4))
-	--raid:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 15, -300*T.raidscale)
-	raid:SetPoint("BOTTOMLEFT", TukuiChatBackgroundLeft, "TOPLEFT", 2, 2)
+	raid:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 0, 0*T.raidscale)
 	
 	local pets = {} 
 		pets[1] = oUF:Spawn('partypet1', 'oUF_TukuiPartyPet1') 
@@ -229,13 +221,13 @@ oUF:Factory(function(self)
 			local numraid = GetNumRaidMembers()
 			local numparty = GetNumPartyMembers()
 			if numparty > 0 and numraid == 0 or numraid > 0 and numraid <= 5 then
-				raid:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 15, -300*T.raidscale)
+				raid:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 0, 0)
 				for i,v in ipairs(pets) do v:Enable() end
 			elseif numraid > 5 and numraid <= 10 then
-				raid:SetPoint('TOPLEFT', UIParent, 15, -260*T.raidscale)
+				raid:SetPoint('TOPLEFT', UIParent, 0, 0)
 				for i,v in ipairs(pets) do v:Disable() end
 			elseif numraid > 10 and numraid <= 15 then
-				raid:SetPoint('TOPLEFT', UIParent, 16, -170*T.raidscale)
+				raid:SetPoint('TOPLEFT', UIParent, 0, 0)
 				for i,v in ipairs(pets) do v:Disable() end
 			elseif numraid > 15 then
 				for i,v in ipairs(pets) do v:Disable() end
